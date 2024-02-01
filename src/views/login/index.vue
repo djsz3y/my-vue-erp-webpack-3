@@ -33,7 +33,7 @@
 
 <script setup>
 // 导入组件之后无需注册可直接使用
-import { Avatar } from '@element-plus/icons'
+// import { Avatar } from '@element-plus/icons'
 import {} from 'vue'
 </script>
 
