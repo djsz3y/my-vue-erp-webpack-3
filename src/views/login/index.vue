@@ -30,9 +30,13 @@
           placeholder="password"
           name="password"
           v-model="loginForm.password"
+          :type="passwordType"
         />
         <span class="show-pwd">
-          <svg-icon icon="eye" />
+          <svg-icon
+            :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+            @click="onChangePwdType"
+          />
         </span>
       </el-form-item>
 
@@ -44,8 +48,7 @@
 </template>
 
 <script setup>
-// 导入组件之后无需注册可直接使用
-// import { Avatar } from '@element-plus/icons'
+// import { Avatar } from '@element-plus/icons' // 导入组件之后无需注册可直接使用
 
 import { ref } from 'vue'
 import { validatePassword } from './rules'
@@ -72,6 +75,16 @@ const loginRules = ref({
     }
   ]
 })
+
+// 处理密码框文本显示状态
+const passwordType = ref('password')
+const onChangePwdType = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
 </script>
 
 <style lang="scss" scoped>
