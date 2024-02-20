@@ -9,6 +9,9 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
+    // 添加 icode
+    config.headers.icode = '6C1A191CCFDCED3F'
+
     // 在这个位置需要统一的去注入token
     if (store.getters.token) {
       // 如果token存在 注入token
