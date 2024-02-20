@@ -26,12 +26,12 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
 
-import variables from '@/styles/variables.scss' // 3.4. 主题更换，sidebar 动态背景
+import variables from '@/styles/variables.module.scss' // 3.4. 主题更换，sidebar 动态背景
 </script>
 
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';
-@import '~@/styles/variables.scss';
+@import '~@/styles/variables.module.scss';
 
 .app-wrapper {
   @include clearfix;
