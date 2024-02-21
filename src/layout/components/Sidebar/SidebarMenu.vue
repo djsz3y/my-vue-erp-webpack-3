@@ -1,12 +1,17 @@
 <template>
   <!-- 一级 menu 菜单 -->
   <el-menu
+    :default-active="activeMenu"
+    :background-color="$store.getters.cssVar.menuBg"
+    :text-color="$store.getters.cssVar.menuText"
+    :active-text-color="$store.getters.cssVar.menuActiveText"
     :uniqueOpened="true"
-    default-active="2"
+    router
+  >
+    <!-- default-active="2"
     background-color="#545c64"
     text-color="#fff"
-    active-text-color="#ffd04b"
-  >
+    active-text-color="#ffd04b" -->
     <!-- 动态侧边栏 -->
     <sidebar-item
       v-for="item in routes"
@@ -36,7 +41,7 @@
 <script setup>
 import SidebarItem from './SidebarItem'
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { filterRouters, generateMenus } from '@/utils/route'
 
 const router = useRouter()
@@ -46,4 +51,13 @@ const routes = computed(() => {
   return generateMenus(filterRoutes)
 })
 console.log(JSON.stringify(routes.value))
+
+// 计算高亮 menu 的方法
+const route = useRoute()
+const activeMenu = computed(() => {
+  const { path } = route
+  return path
+})
+// console.log(route)
+// console.log(activeMenu)
 </script>
