@@ -1,6 +1,9 @@
 <template>
   <!-- 2.2 完成布局结构 -->
-  <div class="app-wrapper">
+  <div
+    class="app-wrapper"
+    :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
+  >
     <!-- 左侧 menu -->
     <sidebar
       id="guide-sidebar"
@@ -46,5 +49,10 @@ import variables from '@/styles/variables.module.scss' // 3.4. 主题更换，si
   right: 0;
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
+  transition: width 0.28s;
+}
+
+.hideSidebar .fixed-header {
+  width: calc(100% - #{$hideSideBarWidth});
 }
 </style>
