@@ -1,5 +1,6 @@
 <template>
   <el-breadcrumb class="breadcrumb" separator="/">
+    <!-- {{ breadcrumbData.value }} -->
     <el-breadcrumb-item
       v-for="(item, index) in breadcrumbData"
       :key="item.path"
