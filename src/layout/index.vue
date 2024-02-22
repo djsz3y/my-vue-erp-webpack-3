@@ -49,7 +49,8 @@ import variables from '@/styles/variables.module.scss' // 3.4. 主题更换，si
   right: 0;
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
-  transition: width 0.28s;
+  // transition: width 0.28s;
+  transition: width #{$sideBarDuration};
 }
 
 .hideSidebar .fixed-header {
