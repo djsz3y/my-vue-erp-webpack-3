@@ -8,6 +8,7 @@
     >
       <div class="title-container">
         <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <lang-select class="lang-select" effect="light"></lang-select>
       </div>
 
       <el-form-item prop="username">
@@ -54,13 +55,16 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n'
 // import { Avatar } from '@element-plus/icons' // 导入组件之后无需注册可直接使用
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { validatePassword } from './rules'
 import { useStore } from 'vuex'
-import router from '@/router/index'
+// import router from '@/router/index'
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import LangSelect from '@/components/LangSelect'
+import { watchSwitchLang2 } from '@/utils/i18n'
 
 // 数据源
 const loginForm = ref({
@@ -74,7 +78,10 @@ const loginRules = ref({
     {
       required: true,
       trigger: 'blur',
-      message: i18n.t('msg.login.usernameRule') // '用户名为必填项'
+      // message: i18n.t('msg.login.usernameRule') // '用户名为必填项'
+      message: computed(() => {
+        return i18n.t('msg.login.usernameRule')
+      })
     }
   ],
   password: [
@@ -100,6 +107,7 @@ const onChangePwdType = () => {
 const loading = ref(false)
 const loginFromRef = ref(null)
 const store = useStore()
+const router = useRouter() // 【注意】
 const handleLogin = () => {
   loginFromRef.value.validate((valid) => {
     if (!valid) return
@@ -118,6 +126,22 @@ const handleLogin = () => {
       })
   })
 }
+
+/**
+ * !done 监听语言变化，重新进行表单校验。
+ */
+// 监听语言变化，重新进行表单校验。issue: https://coding.imooc.com/learn/questiondetail/254087.html
+// watchSwitchLang((newL, oldL) => {
+//   loginFromRef.value.validate()
+// })
+watchSwitchLang2((newL, oldL) => {
+  if (loginFromRef.value && typeof loginFromRef.value.validate === 'function') {
+    loginFromRef.value.validate((valid) => {})
+  } else {
+    // Handle the case when loginFromRef.value is null
+    console.error('loginFromRef.value is null')
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -165,6 +189,19 @@ $cursor: #fff;
     }
   }
 
+  .tips {
+    font-size: 16px;
+    line-height: 28px;
+    color: #fff;
+    margin-bottom: 10px;
+
+    span {
+      &:first-of-type {
+        margin-right: 16px;
+      }
+    }
+  }
+
   .svg-container {
     padding: 6px 5px 6px 15px;
     color: $dark_gray;
@@ -181,6 +218,17 @@ $cursor: #fff;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
+    }
+
+    ::v-deep .lang-select {
+      position: absolute;
+      top: 4px;
+      right: 0;
+      background-color: white;
+      font-size: 22px;
+      padding: 4px;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
 

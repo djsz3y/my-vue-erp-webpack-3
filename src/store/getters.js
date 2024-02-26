@@ -9,7 +9,8 @@ const getters = {
   hasUserInfo: (state) => {
     return JSON.stringify(state.user.userInfo) !== '{}'
   },
-  cssVar: state => variables,
-  sidebarOpened: state => state.app.sidebarOpened // 伸缩侧边栏动画
+  cssVar: (state) => variables,
+  sidebarOpened: (state) => state.app.sidebarOpened, // 伸缩侧边栏动画
+  language: (state) => state.app.language // 国际化
 }
 export default getters
