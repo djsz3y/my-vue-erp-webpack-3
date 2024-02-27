@@ -11,6 +11,7 @@ const getters = {
   },
   cssVar: (state) => variables,
   sidebarOpened: (state) => state.app.sidebarOpened, // 伸缩侧边栏动画
-  language: (state) => state.app.language // 国际化
+  language: (state) => state.app.language, // 国际化
+  mainColor: (state) => state.theme.mainColor // 动态换肤
 }
 export default getters
