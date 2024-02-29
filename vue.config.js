@@ -14,6 +14,12 @@ module.exports = {
         changeOrigin: true // 是否跨域
       }
     }
+    // client: {
+    //   //当出现编译错误或警告时，在浏览器中是否显示全屏覆盖。  示例为只显示错误信息
+    //   overlay: {
+    //     runtimeErrors: false,
+    //   },
+    // }
   },
   configureWebpack: {
     resolve: {

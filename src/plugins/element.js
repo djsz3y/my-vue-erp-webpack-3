@@ -1,5 +1,6 @@
 import ElementPlus from 'element-plus'
-import 'element-plus/lib/theme-chalk/index.css'
+// import 'element-plus/lib/theme-chalk/index.css' // 不存在
+import 'element-plus/dist/index.css'
 // import locale from 'element-plus/lib/locale/lang/zh-cn'
 
 // // 1.导入 element 的中文、英文语言包
