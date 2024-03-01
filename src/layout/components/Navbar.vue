@@ -3,6 +3,8 @@
     <hamburger class="hamburger-container" />
     <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
+      <!-- 全屏 -->
+      <screenfull class="right-menu-item hover-effect" />
       <!-- 动态换肤 -->
       <theme-picker class="right-menu-item hover-effect"></theme-picker>
       <!-- 国际化 -->
@@ -36,6 +38,7 @@
 </template>
 
 <script setup>
+import Screenfull from '@/components/Screenfull'
 import ThemePicker from '@/components/ThemeSelect/index'
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
