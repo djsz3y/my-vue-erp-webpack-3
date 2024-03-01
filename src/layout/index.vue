@@ -8,8 +8,9 @@
     <sidebar
       id="guide-sidebar"
       class="sidebar-container"
-      :style="{ backgroundColor: variables.menuBg }"
+      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
     />
+    <!-- :style="{ backgroundColor: variables.menuBg }" -->
     <!-- 3.4. 主题更换，sidebar 动态背景 -->
     <div class="main-container">
       <div class="fixed-header">
@@ -29,7 +30,7 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
 
-import variables from '@/styles/variables.module.scss' // 3.4. 主题更换，sidebar 动态背景
+// import variables from '@/styles/variables.module.scss' // 3.4. 主题更换，sidebar 动态背景
 </script>
 
 <style lang="scss" scoped>
