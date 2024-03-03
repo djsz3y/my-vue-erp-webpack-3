@@ -132,7 +132,7 @@ const handleLogin = () => {
  */
 // 监听语言变化，重新进行表单校验。issue: https://coding.imooc.com/learn/questiondetail/254087.html
 // watchSwitchLang((newL, oldL) => {
-//   loginFromRef.value.validate()
+//   loginFromRef.value.validate((valid) => {})
 // })
 watchSwitchLang2((newL, oldL) => {
   if (loginFromRef.value && typeof loginFromRef.value.validate === 'function') {
