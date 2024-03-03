@@ -27,11 +27,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { filterRouters, generateMenus } from '@/utils/route'
+import { computed, ref } from 'vue'
+import { filterRouters } from '@/utils/route'
 import { useRouter } from 'vue-router'
 import Fuse from 'fuse.js'
-import list from './fuse.json'
+// import list from './fuse.json'
+import { generateRoutes } from './FuseData'
 
 // 控制 search 显示
 const isShow = ref(false)
@@ -42,30 +43,19 @@ const onShowClick = () => {
   headerSearchSelectRef.value.focus()
 }
 
-// search 相关
-const search = ref('')
-// 搜索方法
-const querySearch = () => {
-  console.log('querySearch')
-}
-// 选中回调
-const onSelectChange = () => {
-  console.log('onSelectChange')
-}
-
+// ------------------------------------------------
 // 检索数据源
 const router = useRouter()
 const searchPool = computed(() => {
   const filterRoutes = filterRouters(router.getRoutes())
-  console.log(generateMenus(filterRoutes))
-  return generateMenus(filterRoutes)
+  return generateRoutes(filterRoutes)
 })
 console.log(searchPool)
 
 /**
  * 搜索库相关
  */
-const fuse = new Fuse(list, {
+const fuse = new Fuse(searchPool.value, {
   // 是否按优先级进行排序
   shouldSort: true,
   // 匹配长度超过这个值的才会被认为是匹配的
@@ -85,6 +75,18 @@ const fuse = new Fuse(list, {
   ]
 })
 console.log(fuse)
+
+// ------------------------------------------------
+// search 相关
+const search = ref('')
+// 搜索方法
+const querySearch = (query) => {
+  console.log('querySearch：', query, '筛选出的options[]：', fuse.search(query))
+}
+// 选中回调
+const onSelectChange = (v) => {
+  console.log('onSelectChange', v)
+}
 </script>
 
 <style lang="scss" scoped>
