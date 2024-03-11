@@ -16,6 +16,8 @@
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <navbar />
+        <!-- tags -->
+        <tags-view></tags-view>
       </div>
       <!-- 内容区 -->
       <app-main />
@@ -29,6 +31,8 @@ import {} from 'vue'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
+
+import TagsView from '@/components/TagsView'
 
 // import variables from '@/styles/variables.module.scss' // 3.4. 主题更换，sidebar 动态背景
 </script>
