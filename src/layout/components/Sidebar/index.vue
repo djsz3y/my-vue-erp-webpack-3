@@ -8,7 +8,7 @@
       />
       <h1 class="logo-title" v-if="$store.getters.sidebarOpened">
         <!-- imooc-admin -->
-        星辰的掌控舱
+        个人前端技术展示
         <!-- {{ $t('msg.test') }} -->
       </h1>
     </div>
