@@ -1,8 +1,10 @@
 <template>
   <div class="navbar">
     <hamburger class="hamburger-container" />
-    <breadcrumb class="breadcrumb-container" />
+    <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
     <div class="right-menu">
+      <!-- 引导 -->
+      <guide class="right-menu-item hover-effect" />
       <!-- 页面检索 -->
       <header-search class="right-menu-item hover-effect"></header-search>
       <!-- 全屏 -->
@@ -40,6 +42,7 @@
 </template>
 
 <script setup>
+import Guide from '@/components/Guide'
 import HeaderSearch from '@/components/HeaderSearch'
 import Screenfull from '@/components/Screenfull'
 import ThemePicker from '@/components/ThemeSelect/index'
