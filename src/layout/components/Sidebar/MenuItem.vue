@@ -1,10 +1,10 @@
 <template>
-  <i
+  <!-- <i
     v-if="icon && icon.includes('el-icon')"
     class="sub-el-icon"
     :class="icon"
-  ></i>
-  <svg-icon v-else :icon="icon"></svg-icon>
+  ></i> -->
+  <svg-icon :icon="icon"></svg-icon>
   <!-- title是路由表router的title，根据路由表title转化为国际化内容，展示到侧边栏上。 -->
   <span>{{ generateTitle(title) }}</span>
 </template>

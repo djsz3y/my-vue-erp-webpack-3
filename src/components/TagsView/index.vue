@@ -17,7 +17,7 @@
         {{ tag.title }}
         <svg-icon
           v-show="!isActive(tag)"
-          class="el-icon-close"
+          icon="close"
           @click.prevent.stop="onCloseClick(index)"
         ></svg-icon>
       </router-link>
