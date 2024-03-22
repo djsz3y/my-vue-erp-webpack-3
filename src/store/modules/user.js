@@ -17,6 +17,7 @@ export default {
       setItem(TOKEN, token)
     },
     setUserInfo(state, userInfo) {
+      userInfo.avatar = ''
       state.userInfo = userInfo
     }
   },
