@@ -1,4 +1,4 @@
-const whiteList = ['/login', '/import', '/404', '/401']
+const whiteList = ['/login', '/import', '/404', '/401'] // 不希望被保存
 
 /**
  * path 是否需要被缓存

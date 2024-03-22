@@ -21,7 +21,7 @@ const getTitle = (route) => {
   if (!route.meta) {
     // 处理无 meta 的路由
     const pathArr = route.path.split('/')
-    title = pathArr[pathArr.length - 1]
+    title = pathArr[pathArr.length - 1] // title 等于当前路径最后一块
   } else {
     title = generateTitle(route.meta.title)
   }
@@ -35,6 +35,7 @@ const store = useStore()
 watch(
   route,
   (to, from) => {
+    // 并不是所有的 路由都需要保存的
     if (!isTags(to.path)) return
     const { fullPath, meta, name, params, path, query } = to
     store.commit('app/addTagsViewList', {
@@ -48,7 +49,7 @@ watch(
     })
   },
   {
-    immediate: true
+    immediate: true // 希望组件被创建时，立即执行
   }
 )
 
