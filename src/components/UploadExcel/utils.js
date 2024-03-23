@@ -3,7 +3,7 @@ import XLSX from 'xlsx'
 /**
  * 获取表头（通用方式）
  */
-export const getHeaderRow = sheet => {
+export const getHeaderRow = (sheet) => {
   const headers = []
   const range = XLSX.utils.decode_range(sheet['!ref'])
   let C
@@ -18,4 +18,8 @@ export const getHeaderRow = sheet => {
     headers.push(hdr)
   }
   return headers
+}
+
+export const isExcel = (file) => {
+  return /\.(xlsx|xls|csv)$/.test(file.name)
 }

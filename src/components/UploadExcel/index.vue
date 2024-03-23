@@ -29,7 +29,8 @@
 <script setup>
 import XLSX from 'xlsx'
 import { defineProps, ref } from 'vue'
-import { getHeaderRow } from './utils'
+import { getHeaderRow, isExcel } from './utils'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   // 上传前回调
@@ -46,7 +47,7 @@ const excelUploadInput = ref(null)
 const handleUpload = () => {
   excelUploadInput.value.click()
 }
-const handleChange = e => {
+const handleChange = (e) => {
   const files = e.target.files
   const rawFile = files[0] // only use files[0]
   if (!rawFile) return
@@ -56,7 +57,7 @@ const handleChange = e => {
 /**
  * 触发上传事件
  */
-const upload = rawFile => {
+const upload = (rawFile) => {
   excelUploadInput.value.value = null
   // 如果没有指定上传前回调的话
   if (!props.beforeUpload) {
@@ -73,14 +74,14 @@ const upload = rawFile => {
 /**
  * 读取数据（异步）
  */
-const readerData = rawFile => {
+const readerData = (rawFile) => {
   loading.value = true
   return new Promise((resolve, reject) => {
     // https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader
     const reader = new FileReader()
     // 该事件在读取操作完成时触发
     // https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/onload
-    reader.onload = e => {
+    reader.onload = (e) => {
       // 1. 获取解析到的数据
       const data = e.target.result
       // 2. 利用 XLSX 对数据进行解析
@@ -108,8 +109,37 @@ const readerData = rawFile => {
 /**
  * 根据导入内容，生成数据
  */
-const generateData = excelData => {
+const generateData = (excelData) => {
   props.onSuccess && props.onSuccess(excelData)
+}
+
+/**
+ * 拖拽文本释放时触发
+ */
+const handleDrop = (e) => {
+  // 上传中跳过
+  if (loading.value) return
+  const files = e.dataTransfer.files
+  if (files.length !== 1) {
+    ElMessage.error('必须要有一个文件')
+    return
+  }
+  const rawFile = files[0]
+  if (!isExcel(rawFile)) {
+    ElMessage.error('文件必须是 .xlsx, .xls, .csv 格式')
+    return false
+  }
+  // 触发上传事件
+  upload(rawFile)
+}
+
+/**
+ * 拖拽悬停时触发
+ */
+const handleDragover = (e) => {
+  // https://developer.mozilla.org/zh-CN/docs/Web/API/DataTransfer/dropEffect
+  // 在新位置生成源项的副本
+  e.dataTransfer.dropEffect = 'copy'
 }
 </script>
 
